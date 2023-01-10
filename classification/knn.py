@@ -80,4 +80,4 @@ if __name__ == '__main__':
     knn = KNN()
     knn.fit(X, y)
     # knn.predict(np.array([[4]]))
-    print(knn.predict(np.array([[4]]), k=5))
+    print(knn.predict(np.array([[3]]), k=7))
