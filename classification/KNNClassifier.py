@@ -1,4 +1,4 @@
-from typing import Union, Tuple
+from typing import Union
 import numpy as np
 import pandas as pd
 from scipy.spatial.distance import euclidean
