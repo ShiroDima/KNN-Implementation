@@ -46,13 +46,11 @@ class KNN:
 
         return probs
 
-    # TODO: Implement the predict function to return the class for which it thinks is right
     def predict(self, x:np.ndarray, k:int=None) -> int:
         if k is not None:
             self.k = k
         neighbors =  self._generate_n_neighbors(x)
         class_probabilities = self._generate_probs(neighbors)
-        print(class_probabilities.T)
         return np.argmax(class_probabilities)
 
 
