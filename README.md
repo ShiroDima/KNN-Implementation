@@ -5,4 +5,4 @@ Implementation of the KNN model for both classification and regression
 Given a positive integer K and a test observation $x_0$, the classifier first creates a set $N_0$ that contains the 
 K points in the training set that are closest to $x_0$.
 The `KNN model` for classification tries to estimate the conditional probability for class j as the fraction of points in $N_0$ whose response values equal j:
-$$Pr(Y=j\,|\,X=x_0) = \frac{1}{K} \; \sum_{i \in N_0}{I(y_i = j)}$$
+$$Pr(Y=j|X=x_0) = \frac{1}{K} \sum_{i \in N_0}{I(y_i = j)}$$
