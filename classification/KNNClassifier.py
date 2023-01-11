@@ -85,6 +85,8 @@ class KNNClassifier:
 
 
     def predict(self, x:np.ndarray, k:int=None) -> int:
+        if self.X is None or self.y is None:
+            raise TypeError("Please fit the model before trying to use it for predictions")
         if k is not None:
             self.k = k
         neighbors =  self._generate_k_neighbors(x)
