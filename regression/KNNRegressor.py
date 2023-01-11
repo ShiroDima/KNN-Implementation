@@ -7,7 +7,6 @@ class KNNRegressor:
     def __init__(self) -> None:
         self.X = None,
         self.y = None,
-        self._num_of_classes = None
         self.k = 3
 
 
@@ -23,7 +22,7 @@ class KNNRegressor:
         -------
         None
         """
-        if isinstance(X, pd.DataFrame) and isinstance(y, pd.Series):
+        if isinstance(X, pd.DataFrame) and (isinstance(y, pd.Series) or isinstance(y, pd.DataFrame)):
             self.X = X.values
             self.y = y.values
             self._num_of_classes = len(np.unique(self.y))
@@ -31,22 +30,6 @@ class KNNRegressor:
             self.X = X
             self.y = y
             self._num_of_classes = len(np.unique(self.y))
-
-
-    def indicator(self, j:int, y_i:int) -> bool:
-        """
-        This indicator function takes to inputs are returns true if they're the same and false if they not
-
-        Parameters
-        ----------
-        j: An integer denoting the current class being compared
-        y_i: An integer denoting the class of observation i
-
-        Returns
-        -------
-        boolean
-        """
-        return j == y_i
 
 
     def _generate_k_neighbors(self, x:np.ndarray) -> np.array:
