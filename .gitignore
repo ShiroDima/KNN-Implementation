@@ -11,6 +11,7 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+knn/
 downloads/
 eggs/
 .eggs/
@@ -104,6 +105,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.knn
 env/
 venv/
 ENV/
