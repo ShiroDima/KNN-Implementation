@@ -24,7 +24,7 @@ def test_fit(data, FitKNN):
     assert np.equal(FitKNN.y, data[1]).all()
 
 
-def test_generate_n_neighbors(FitKNN):
+def test_generate_k_neighbors(FitKNN):
     assert max(FitKNN._generate_k_neighbors(np.array([[3]])).shape) == FitKNN.k
 
 

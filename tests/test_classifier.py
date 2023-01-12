@@ -25,7 +25,7 @@ def test_fit(data, FitKNN):
 
 
 def test_generate_n_neighbors(FitKNN):
-    assert max(FitKNN._generate_n_neighbors(np.array([[3]])).shape) == FitKNN.k
+    assert max(FitKNN._generate_k_neighbors(np.array([[3]])).shape) == FitKNN.k
 
 
 def test_indicator_function(KNN):

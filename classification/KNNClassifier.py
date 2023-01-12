@@ -5,8 +5,8 @@ from scipy.spatial.distance import euclidean
 
 class KNNClassifier:
     def __init__(self) -> None:
-        self.X = None,
-        self.y = None,
+        self.X = None
+        self.y = None
         self._num_of_classes = None
         self.k = 3
 
@@ -63,7 +63,7 @@ class KNNClassifier:
         if self.X.shape[1] != x.shape[1]:
             raise ValueError("input x must have the same number of columns as the data matrix")
 
-        if X.shape[1] < 2:
+        if self.X.shape[1] < 2:
             distance = [euclidean(x_i, x[0]) for x_i in self.X]
         else:
             distance = []
