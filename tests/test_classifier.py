@@ -6,7 +6,7 @@ from classification.KNNClassifier import KNNClassifier
 
 @pytest.fixture
 def data():
-    class_data = pd.read_csv("../data/diabetes.csv")
+    class_data = pd.read_csv("data/diabetes.csv")
     X, y = class_data.drop(columns=["Outcome"]), class_data[["Outcome"]]
     return X, y
 

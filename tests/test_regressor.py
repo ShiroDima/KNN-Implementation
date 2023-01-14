@@ -6,7 +6,7 @@ from regression.KNNRegressor import KNNRegressor
 
 @pytest.fixture
 def data():
-    reg_data = pd.read_csv("../data/cal_house_pricing.csv")
+    reg_data = pd.read_csv("data/cal_house_pricing.csv")
     X, y = reg_data.drop(columns=["y"]), reg_data[["y"]]
 
     return X, y
