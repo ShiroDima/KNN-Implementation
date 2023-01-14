@@ -43,24 +43,37 @@ class KNNRegressor:
         -------
         neighbors:np.array
         """
-        if self.X.shape[1] != x.shape[1]:
+        try:
+            n_cols = x.shape[1]
+        except IndexError:
+            raise IndexError("If predicting on a single sample, use x.reshape(1, -1)")
+
+        if self.X.shape[1] != n_cols:
             raise ValueError("input x must have the same number of columns as the data matrix")
 
         if self.X.shape[1] < 2:
             distance = [euclidean(x_i, x[0]) for x_i in self.X]
+            idx_array = np.argpartition(distance, self.k)
+            neighbors = self.y[idx_array][:self.k].T
+
+            return neighbors
         else:
             distance = []
-            for i in range(self.X.shape[0]):
-                distance.append(euclidean(X[i, :], x))
+            for j in range(x.shape[0]):
+                row_distance = []
+                for i in range(self.X.shape[0]):
+                    row_distance.append(euclidean(self.X[i, :], x[j, :]))
 
-        idx_array = np.argpartition(distance, self.k)
-        neighbors = self.y[idx_array][:self.k].T
-
-        return neighbors
+                distance.append(row_distance)
+            distance = np.array(distance)
+            idx_array = np.argpartition(distance, self.k, axis=1)
+            neighbors = np.take_along_axis(
+                self.y, idx_array, axis=0)[:, :self.k]
+            return neighbors
 
 
     def _find_average(self, y:np.ndarray) -> np.array:
-        return y.sum() / self.k
+        return np.sum(y, axis=1) / self.k
 
 
     def predict(self, x:np.ndarray, k:int=None) -> int:
@@ -74,9 +87,9 @@ class KNNRegressor:
 
 
 if __name__ == '__main__':
-    X = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]]).T
-    y = np.array([[0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0]]).T
-
+    reg_data = pd.read_csv("../data/cal_house_pricing.csv")
+    X, y = reg_data.drop(columns=["y"]), reg_data[["y"]]
+    X_pred_reg = X.iloc[:5].values
     knn = KNNRegressor()
     knn.fit(X, y)
-    print(knn.predict(np.array([[3]]), k=7))
+    print(knn.predict(X_pred_reg, k=5))
